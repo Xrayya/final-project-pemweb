@@ -10,13 +10,9 @@ return new class () extends Migration {
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('username')->unique();
-            $table->string('password');
-            $table->string('email')->unique();
-            $table->text('bio');
-            $table->string('display_name');
+        Schema::create('follows', function (Blueprint $table) {
+            $table->bigInteger('id_follower');
+            $table->bigInteger('id_followed');
             $table->timestamps();
         });
     }
@@ -26,6 +22,6 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('follows');
     }
 };
