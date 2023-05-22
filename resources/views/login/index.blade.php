@@ -8,15 +8,23 @@
 
 @section('container')
     <main class="form-signin col-lg-4 col-md-8 m-auto">
-        <form method="post">
-            <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
-
+        @if (session()->has('loginError'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Sorry, <strong>{{ session('loginError') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+        <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
+        <form action="/login" method="post">
+            @csrf
             <div class="form-floating">
-                <input type="email" class="form-control" id="email-form" placeholder="name@example.com">
+                <input type="email" name="email" class="form-control" id="email-form" placeholder="name@example.com"
+                    required>
                 <label for="email-form">Email address</label>
             </div>
             <div class="form-floating">
-                <input type="password" class="form-control" id="password-form" placeholder="Password">
+                <input type="password" name="password" class="form-control" id="password-form" placeholder="Password"
+                    required>
                 <label for="password-form">Password</label>
             </div>
 
