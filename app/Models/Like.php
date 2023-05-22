@@ -13,4 +13,14 @@ class Like extends Model
         'id_user',
         'id_post',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'id_post');
+    }
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'id_user');
+    }
 }
