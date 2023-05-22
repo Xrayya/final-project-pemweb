@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -38,14 +37,14 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function posts(): HasMany
+    public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, 'id_user');
     }
 
     public function likes()
     {
-        return $this->hasMany(Like::class);
+        return $this->hasMany(Like::class, 'id_user');
     }
 
     public function follower()

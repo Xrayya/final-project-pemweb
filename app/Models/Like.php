@@ -14,13 +14,13 @@ class Like extends Model
         'id_post',
     ];
 
-    public function posts()
+    public function post()
     {
-        return $this->hasMany(Post::class, 'id_post');
+        return $this->belongsTo(Post::class, 'id_post');
     }
 
-    public function users()
+    public function user()
     {
-        return $this->hasMany(User::class, 'id_user');
+        return $this->belongsTo(User::class, 'id_user');
     }
 }
