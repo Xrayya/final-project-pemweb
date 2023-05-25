@@ -1,8 +1,4 @@
 $(function() {
-    $('.comment-button').on('click', function() {
-        console.log('comment');
-    });
-
     $('.like-button').on('click', function() {
         const idUser = $(this).data('id-user');
         const idPost = $(this).data('id-post');
@@ -14,7 +10,7 @@ $(function() {
         });
 
         $.ajax({
-            url: `http://${window.location.hostname}:${window.location.port}/home/toggle-like`,
+            url: `http://${window.location.hostname}:${window.location.port}/toggle-like`,
             data: {
                 id_user: idUser,
                 id_post: idPost,

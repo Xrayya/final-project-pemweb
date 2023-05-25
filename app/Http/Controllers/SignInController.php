@@ -5,12 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class SignInController extends Controller
 {
     public function index()
     {
         return view('login.index')
-            ->with('title', 'Login');
+            ->with('title', 'Sign In');
     }
 
     public function authenticate(Request $request)
@@ -26,10 +26,10 @@ class LoginController extends Controller
             return redirect()->intended('/');
         }
 
-        return back()->with('loginError', 'Login failed!');
+        return back()->with('signinError', 'Sign in failed!');
     }
 
-    public function logout(Request $request)
+    public function signout(Request $request)
     {
         Auth::logout();
 
@@ -37,6 +37,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/signin');
     }
 }

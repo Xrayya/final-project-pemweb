@@ -52,7 +52,7 @@ class User extends Authenticatable
         return $this->hasMany(Follow::class, 'id_followed');
     }
 
-    public function followed()
+    public function following()
     {
         return $this->hasMany(Follow::class, 'id_follower');
     }

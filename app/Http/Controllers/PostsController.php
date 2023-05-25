@@ -14,13 +14,14 @@ class PostsController extends Controller
     {
         $validatedData = $request->validate([
             'post' => 'required|min:1|max:255',
+            'parent' => 'integer'
         ]);
 
         $validatedData['id_user'] = auth()->user()->id;
 
         Post::create($validatedData);
 
-        return redirect('/')->with('success', 'Successfully upload post');
+        return back()->with('success', 'Successfully upload post');
     }
 
     /**
@@ -28,7 +29,32 @@ class PostsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::find($id);
+        $post->liked = false;
+        $likes = $post->likes;
+        foreach ($likes as $like) {
+            if ($like->id_user == auth()->user()->id) {
+                $post->liked = true;
+                break;
+            }
+        }
+
+        $comments = Post::where('parent', $id)->orderBy('created_at', 'desc')->get();
+        foreach ($comments as $comment) {
+            $comment->liked = false;
+            $likes = $comment->likes;
+            foreach ($likes as $like) {
+                if ($like->id_user == auth()->user()->id) {
+                    $comment->liked = true;
+                    break;
+                }
+            }
+        }
+
+        return view('post.detail')
+            ->with('title', 'Post')
+            ->with('post', $post)
+            ->with('comments', $comments);
     }
 
     /**
