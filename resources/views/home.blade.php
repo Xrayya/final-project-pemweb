@@ -18,8 +18,16 @@
                 <div class="card-body">
                     <p class="card-text">{{ $post->post }}</p>
                     <div class="w-100">
-                        <button class="border border-0 bg-transparent text-body-tertiary">
-                            <i class="bi bi-suit-heart"></i>
+                        <button class="border border-0 bg-transparent text-body-tertiary like-button"
+                            data-id-user="{{ auth()->user()->id }}" data-id-post='{{ $post->id }}'>
+                            @if ($post->liked == true)
+                                <i class="bi bi-suit-heart-fill"></i>
+                            @else
+                                <i class="bi bi-suit-heart"></i>
+                            @endif
+                            <span class="like-count">{{ $post->likes->count() }}</span>
+                        </button>
+                        <button class="border border-0 bg-transparent text-body-tertiary comment-button">
                             <i class="bi bi-chat-dots"></i>
                         </button>
                     </div>
@@ -27,4 +35,8 @@
             </div>
         @endforeach
     </main>
+@endsection
+
+@section('body_footer')
+    <script src="js/home.js"></script>
 @endsection
