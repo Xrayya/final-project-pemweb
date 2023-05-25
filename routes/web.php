@@ -20,4 +20,4 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/', [HomeController::class, 'index'])->middleware('auth')->name('home');
-Route::get('/home/toggle-like', [HomeController::class, 'toggleLike']);
+Route::post('/home/toggle-like', [HomeController::class, 'toggleLike']);

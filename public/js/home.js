@@ -7,13 +7,19 @@ $(function() {
         const idUser = $(this).data('id-user');
         const idPost = $(this).data('id-post');
 
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            },
+        });
+
         $.ajax({
             url: `http://${window.location.hostname}:${window.location.port}/home/toggle-like`,
             data: {
                 id_user: idUser,
                 id_post: idPost,
             },
-            method: 'get',
+            method: 'post',
             dataType: 'json',
             success: function(respons) {
                 let count = $(`button[data-id-post="${respons.id_post}"]`)

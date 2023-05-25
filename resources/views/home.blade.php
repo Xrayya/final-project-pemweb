@@ -1,11 +1,29 @@
 @extends('layouts.main')
 
+@section('extended_header')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
+
 @section('body_header')
     @include('partials.navbar')
 @endsection
 
 @section('container')
     <main class="col-lg-5 col-md-8 m-auto">
+        <div class="card">
+            <div class="card-header">
+                {{ auth()->user()->display_name }}
+                <small class="text-muted">
+                    - <a href="#" class="text-decoration-none text-muted">{{ '@' . auth()->user()->username }}</a>
+                </small>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type something..."></textarea>
+                </div>
+            </div>
+        </div>
+        <hr>
         @foreach ($posts as $post)
             <div class="card text-start my-1">
                 <div class="card-header">
