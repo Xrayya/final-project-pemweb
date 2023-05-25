@@ -10,6 +10,12 @@
 
 @section('container')
     <main class="col-lg-5 col-md-8 m-auto">
+        @if (session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Hooray, <strong>{{ session('success') }}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card">
             <div class="card-header">
                 {{ auth()->user()->display_name }}
@@ -19,7 +25,12 @@
             </div>
             <div class="card-body">
                 <div class="mb-3">
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type something..."></textarea>
+                    <form action="/post" method="post">
+                        @csrf
+                        <textarea class="form-control" id="post" name="post" rows="3" placeholder="Type something..."
+                            maxlength="255" required></textarea>
+                        <input type="submit" class="btn btn-primary mt-2" value="Post">
+                    </form>
                 </div>
             </div>
         </div>
