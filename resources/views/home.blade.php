@@ -20,15 +20,16 @@
             <div class="card-header">
                 {{ auth()->user()->display_name }}
                 <small class="text-muted">
-                    - <a href="#" class="text-decoration-none text-muted">{{ '@' . auth()->user()->username }}</a>
+                    - <a href="/profile/{{ auth()->user()->id }}"
+                        class="text-decoration-none text-muted">{{ '@' . auth()->user()->username }}</a>
                 </small>
             </div>
             <div class="card-body">
-                <div class="mb-3">
+                <div class="mb-1">
                     <form action="/post" method="post">
                         @csrf
                         <textarea class="form-control" id="post" name="post" rows="3" placeholder="Type something..."
-                            maxlength="255" required></textarea>
+                            maxlength="255"></textarea>
                         <input type="submit" class="btn btn-primary mt-2" value="Post">
                     </form>
                 </div>
@@ -40,12 +41,17 @@
                 <div class="card-header">
                     {{ $post->user->display_name }}
                     <small class="text-muted">
-                        - <a href="#" class="text-decoration-none text-muted">{{ '@' . $post->user->username }}</a> ·
+                        - <a href="/profile/{{ $post->user->id }}"
+                            class="text-decoration-none text-muted">{{ '@' . $post->user->username }}</a> ·
                         {{ $post->created_at->diffForHumans() }}
                     </small>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">{{ $post->post }}</p>
+                    <p class="card-text">
+                        <a href="/post/{{ $post->id }}" class="text-decoration-none text-black d-block">
+                            {{ $post->post }}
+                        </a>
+                    </p>
                     <div class="w-100">
                         <button class="border border-0 bg-transparent text-body-tertiary like-button"
                             data-id-user="{{ auth()->user()->id }}" data-id-post='{{ $post->id }}'>
@@ -58,6 +64,7 @@
                         </button>
                         <button class="border border-0 bg-transparent text-body-tertiary comment-button">
                             <i class="bi bi-chat-dots"></i>
+                            <span class="comment-count">{{ $post->children->count() }}</span>
                         </button>
                     </div>
                 </div>
@@ -67,5 +74,6 @@
 @endsection
 
 @section('body_footer')
-    <script src="js/home.js"></script>
+    <script src="js/sidebars.js"></script>
+    <script src="js/likes.js"></script>
 @endsection

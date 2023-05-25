@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'username' => 'test',
-            'password' => bcrypt('rahasia'),
+            'password' => bcrypt('rahasia1'),
             'email' => 'testing@gmail.com',
             'bio' => 'saya adalah mahasiswa FILKOM',
             'display_name' => 'Testing User'
@@ -30,9 +30,8 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'username' => 'test2',
-            'password' => bcrypt('rahasia'),
+            'password' => bcrypt('rahasia2'),
             'email' => 'testing2@gmail.com',
-            'bio' => 'saya adalah mahasiswa FILKOM',
             'display_name' => 'Testing User 2'
         ]);
 
