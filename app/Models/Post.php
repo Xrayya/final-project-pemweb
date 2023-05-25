@@ -13,7 +13,7 @@ class Post extends Model
     protected $fillable = [
         'post',
         'parent',
-        'user_id'
+        'id_user'
     ];
 
     public function user(): BelongsTo
