@@ -49,10 +49,13 @@ class DatabaseSeeder extends Seeder
 
         Post::create([
             'post' => 'post3',
+            'parent' => 1,
             'id_user' => 1
         ]);
+
         Post::create([
             'post' => 'post4',
+            'parent' => 1,
             'id_user' => 2
         ]);
 
